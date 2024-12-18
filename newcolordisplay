@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+from PIL import Image
+
+def visualize_patterns():
+    # Color Palette Convergence
+    colors = ['#1ABC9C', '#3498DB', '#F1C40F']  
+    sns.palplot(sns.color_palette(colors))
+    plt.title("Color Palette Convergence")
+    plt.show()
+
+    # Pose Clustering
+    poses = ['lounging', 'standing', 'leaning']
+    for pose in poses:
+        try:
+            img = Image.open(f'{pose}.jpg')  # Assuming images named lounging.jpg, standing.jpg, etc.
+            img.show()
+        except FileNotFoundError:
+            print(f"Image for pose '{pose}' not found.")
+
+    # Accessory Synchronization & Scene Convergence (combined)
+    accessory_scene_grid = Image.new('RGB', (1000, 1000))
+
+    # Load accessory-scene images and grid them here
+    accessory_images = ['accessory_scene1.jpg', 'accessory_scene2.jpg', 'accessory_scene3.jpg']  # Add your images here
+    positions = [(0, 0), (500, 0), (0, 500)]  # Example positions for placing images
+
+    for img_name, pos in zip(accessory_images, positions):
+        try:
+            accessory_img = Image.open(img_name)
+            accessory_scene_grid.paste(accessory_img, pos)
+        except FileNotFoundError:
+            print(f"Accessory scene image '{img_name}' not found.")
+
+    accessory_scene_grid.show()
